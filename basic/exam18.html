@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	/*
+		동적 문서 객체 생성
+			createElement(tagName)		: tagName의 요소 생성
+			createTextNode(text)		: 요소에 삽입될 text 생성
+			
+			appendChild(element)		: 자식 요소로 연결 (붙여라.)
+			
+		[순서]
+		1. 요소 생성
+		2. 요소에 대한 작업 수행 (속성)
+		3. 문서와 연결
+	*/
+	window.onload = function() {
+		var tag = document.createElement('h1');
+		// <h1></h1>
+		var textTag = document.createTextNode('Heading !!!');
+		// 'Heading !!!'
+		
+		// 문서 객체 연결
+		tag.appendChild(textTag); // h1 요소에 text 요소를 자식으로 연결
+		// <h1>Heading !!!</h1>
+		document.body.appendChild(tag); // body 요소에 tag를 자식으로 연결
+		// <body><h1>Heading !!!</h1></body>
+		
+		
+		var imgTag = document.createElement('img');
+		// <img></img>
+		imgTag.setAttribute('src', 'http://www.inzent.com/img/header_logo.png');
+		// img 태그의 속성 부여
+		// <img src="..."></img>
+		
+// 		document.body.appendChild(imgTag);
+		// <body><img src="..."></img></body>
+		
+		var aTag = document.createElement('a');
+		// <a></a>
+		aTag.setAttribute('href', 'http://www.inzent.com');
+		// <a href="..."></a>
+		aTag.appendChild(imgTag); // a 태그의 자식으로 img 태그를 연결
+		// <a href="..."><img src="..."></img></a>
+		document.body.appendChild(aTag);
+		// <body><a href="..."><img src="..."></img></a></body>
+		
+		/*
+			Q. 3x3 크기의 테이블을 생성하세요.
+		*/
+		function drawTable(row, col) {
+			var tableTag = document.createElement('table');
+			tableTag.setAttribute('border', '1');
+			for(var i = 0; i < row; i++) {
+				var trTag = document.createElement('tr');
+				for(var j = 0; j < col; j++) {					
+					var tdTag = document.createElement('td');
+					var tdText = document.createTextNode('Element');
+					tdTag.appendChild(tdText);				
+					trTag.appendChild(tdTag);
+				}
+				tableTag.appendChild(trTag);
+			}
+			document.body.appendChild(tableTag);
+		}
+		drawTable(3, 3); // 3x3
+		drawTable(3, 5); // 3x5
+		drawTable(4, 2); // 4x2 
+	}
+</script>
+</head>
+<body>
+
+</body>
+</html>
+
+
+
+
+
