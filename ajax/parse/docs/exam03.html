@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+	$(function() {
+		$.ajax({
+			url: 'data.xml',
+			dataType: 'xml',
+			success: function(data) {
+				$('item', data).each(function() {
+					$('dl').append('<dt><a href="'
+								+ $('link', this).text()
+								+ '">'
+								+ $('title', this).text()
+								+ '</a></dt><dd>'
+								+ $('description', this).text()
+								+ '</dd>');
+				});
+			}
+		});
+	});
+</script>
+</head>
+<body>
+	<!-- 
+		정의 목록 태그
+		<dl></dl> : Definition List (정의 목록) -> <ul>, <ol>
+		<dt></dt> : Definition Term (정의 용어, 제목)
+		<dd></dd> : Definition Description (정의 설명, 내용)
+	 -->
+	<dl>
+	</dl>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

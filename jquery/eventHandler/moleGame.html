@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+td {
+	width: 150px;
+	height: 120px;
+	border: 2px solid black;
+	border-radius: 500px
+}
+span {
+	width: 150px;
+	height: 120px;
+	border-radius: 300px
+}
+</style>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	var players = {
+		1 : new Audio(''), // sound file path
+		2 : new Audio(''),
+		3 : new Audio('')
+	};
+	
+// 	document.oncontextmenu = function(e) {
+// 		return false;
+// 	};
+
+	$(function(){
+		// 우클릭, 드래그 방지
+		$(document).bind('ontextmenu', function(){ return false; });
+		$(document).bind('mousedown', function(){ return false; });
+		
+		// 게임 시간
+		var gameTime = 30;
+		$('#time-cnt').html('남은 시간 : ' + gameTime);
+		function time() {
+			$('#time-cnt').html('남은 시간 : ' + gameTime);
+		}
+		
+		// 게임 점수
+		var score = 0;
+		var pin = [];
+		$('#score-view').html('Score : ' + score);
+		function preScore(i) {
+			score = score + i;
+			$('#score-view').html('Score : ' + score);
+			pin.pop('in');
+		}
+		
+		// 효과음
+		function play(i) {
+			if(window.HTMLAudioElement) {
+				players[i].play();
+			}
+		}
+		
+		// 도구 (무기)
+		var toolIdx = Math.round(Math.random() * 1);
+		var tool = ['주먹', '망치', '폭탄'];
+		alert(tool[toolIdx] + '으로 시작합니다!');
+		
+		function weapon(toolIdx) {
+			switch(toolIdx) {
+			case 0:
+				$('span').dblclick(function(){
+					$(this).stop(true, true);
+					$(this).fadeOut(150, function() {
+						play(1);
+						preScore(300);
+					});
+				});
+				break;
+			case 1:
+				$('span').click(function() {
+					$(this).stop(true, true);
+					$(this).fadeOut(150, function() {
+						play(2);
+						preScore(200);
+					});
+				});
+				break;
+			case 2:
+				alert('폭탄을 획득하셨습니다.\n한번 던지면 모든 두더지를 제거합니다!');
+				$('span').click(function() {
+					$('[data-name=dude]').stop(true, true);
+					$('[data-name=dude]').fadeOut(150);
+					score = score + pin.length * 100;
+					play(3);
+					pin.length = 0;
+					$('#score-view').html('Score : ' + score);
+				});
+				break;
+			}
+		}
+		weapon(toolIdx);
+		
+		// 두더지 등장 주기
+		function showTime() {
+			var showTime = Number((Math.random() * 4 + 3) * 100);
+			if(gameTime == 20)
+				showTime = Number((Math.random() * 4 + 2) * 100);
+			if(gameTime == 10)
+				showTime = Number((Meth.random() * 400));
+			return showTime;
+		}
+		
+		// 두더지 랜덤 발생 트리거
+		setInterval(function() {
+			var showNum = Math.round(Math.random() * 8 - 0.4);
+			
+			$('#target' + showNum).keydown(function() {
+				var color = ['red', 'green', 'blue', 'purple'];
+				var colorNum = Math.floor(Math.random() * 4);
+				var fadeNum = Math.round(Math.random() * 1.5) * 100;
+				
+				// i : delay, j : hide
+				if(gameTime == 30) { i = 2400; j = 'slow';   }
+				if(gameTime == 20) { i = 1600; j = 'normal'; }
+				if(gameTime == 10) { i = 800;  j = 'fast';   }
+				
+				$(this).children().css('background-color', color[colorNum])
+								  .fadeIn(fadeNum, function() {
+									 pin.push('in'); 
+								  })
+								  .delay(i)
+								  .hide(j, function() {
+									 pin.pop('in');  
+								  });
+			});
+			// 특정 이벤트를 발생 시키는 트리거
+			$('#target' + showNum).trigger('keydown');
+		}, showTime());
+		
+		// 시간 카운트
+		$('#time-cnt').keyup(function() {
+			if(gameTime > 0) { gameTime = gameTime - 1; }
+			time();
+			if(gameTime == 10) weapon(2);
+			if(gameTime == 0) {
+				alert('Score : ' + score); // blocked
+				// 게임 종료 시점
+				// TODO
+			}
+		});
+		
+		// 시간 트리거
+		setInterval(function() {
+			$('#time-cnt').trigger('keyup');
+		}, 1000);
+	});
+	
+</script>
+</head>
+<body>
+	<div style="height: 100px"></div>
+	
+	<div align="center">
+		<h1 id="time-cnt"></h1>
+		<div style="width: 700px; height: 350px;
+			cursor: pointer" id="mole">
+			<h3 id="score-view">Score : 0</h3>
+			<table>
+				<tr>
+					<td id="target0"><span data-name="dude"></span></td>
+					<td id="target1"><span data-name="dude"></span></td>
+					<td id="target2"><span data-name="dude"></span></td>
+				</tr>
+				<tr>
+					<td id="target3"><span data-name="dude"></span></td>
+					<td id="target4"><span data-name="dude"></span></td>
+					<td id="target5"><span data-name="dude"></span></td>
+				</tr>
+				<tr>
+					<td id="target6"><span data-name="dude"></span></td>
+					<td id="target7"><span data-name="dude"></span></td>
+					<td id="target8"><span data-name="dude"></span></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	/*
+		1. class 속성이 존재하는 요소의 색상을 블루로 변경
+		2. title 속성이 second인 요소의 색상을 레드로 변경
+		3. class 속성이 blue가 아닌 요소에 언더라인 설정
+	*/
+	$(function() {
+		setTimeout(function(){
+			$('[class]').css('color', 'blue');
+			$('[title="second"]').css('color', 'red');
+// 			$('[class!="blue"]').css('textDecoration', 'underline');
+			// class가 "blue"가 아닌 모든 요소에 적용! (HTML 문서 상)
+			//	-> <html>, <head>, <body>, <ul>, ...
+			$('li[class!="blue"]').css('textDecoration', 'underline');
+			// not 조건 시 나도 모르게 들어갈 수 있다.
+		}, 2000);
+	});
+</script>
+</head>
+<body>
+	<ul>
+		<li class="blue">첫 번째 리스트 입니다.</li>
+		<li class="red" title="second">두 번째 리스트 입니다.</li>
+		<li class="" title="third">세 번째 리스트 입니다.</li>
+		<li title="fourth">네 번째 리스트 입니다.</li>
+	</ul>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

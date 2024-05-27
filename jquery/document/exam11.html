@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(function() {
+		$('#weather').attr('href', 'https://weather.naver.com');
+		$('#weather').attr('href', function(idx, oriValue) {
+			return oriValue + '/rgn/townWetr.nhn';	
+		});
+		// 원본 속성의 값을 추출하여, 동네별 날씨의 URI를 붙여라.
+		//	-> https://weather.naver.com/rgn/townWetr.nhn
+		
+		/*
+			[네이버 검색 결과로 이동하기]
+			 - 검색어를 입력받아 검색을 누르면 네이버 검색 결과로 이동하세요.
+			 - https://search.naver.com/search.naver?query=jQuery
+				-> GET 방식 전달 파라미터 query 활용!
+		*/
+		var baseURI = 'https://search.naver.com/search.naver?query=';
+		$('#btn_srch').click(function() {
+			var query = $('#search').val();
+			location.href = baseURI + query;
+		});
+	});
+</script>
+</head>
+<body>
+	<a id="weather" title="네이버 날씨">네이버 날씨</a>
+	<br><br>
+	<input id="search" type="text">
+	<button id="btn_srch">네이버 검색</button>
+</body>
+</html>
+
+
+
+
+
+
+
+

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<div id="app">
+			<!-- 반복문을 통해 brands 내부의 객체 shoes를 template으로 전달! -->
+			<!-- 컴포넌트의 shoes 프로퍼티의 데이터로 전달! -->
+			<shoes-component v-for="shoes in brands" :shoes="shoes">
+			<!-- 
+				brands 배열에서 shoes 객체를 뽑아,	v-for="shoes in brands"
+				컴포턴트의 shoes와 연결시켜라!			:shoes="shoes"
+			 -->
+			</shoes-component>
+		</div>
+	</div>
+	
+	<!-- Vue 컴포넌트 등록 -->
+	<template id="shoes-template">
+		<div class="thumbnail">
+			<div class="caption">
+				<h3>{{ shoes.productName }}</h3>
+				<p>수량 : {{ shoes.quantity }}</p>
+				<p>
+					<button class="btn btn-primary"
+						@click="buy" :disabled="!available">
+					구매
+					</button>
+				</p>
+			</div>
+		</div>
+	</template>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	Vue.component('shoes-component', {
+		template : '#shoes-template',
+		props : ['shoes'],
+		
+		// 컴포넌트 별 methods, computed Proerties 지정 가능!
+		// TODO 컴포넌트 내의 버튼을 클릭 시
+		//		1. 해당 컴포넌트의 수량 감소		(methods)
+		//		2. 수량이 0이라면 버튼 비활성화		(computed)
+	
+		// Methods
+		//  버튼 클릭 시 buy 메소드가 호출됨.
+		//	*수량(quantity) 감소
+		methods : {
+			buy : function() {
+				this.shoes.quantity--;
+			}
+		},
+		
+		// Computed
+		//	buy 메소드에 의해 수량(quantity)이 변화
+		//  available 프로퍼티가 quantity에 의존!
+		//  활성, 비활성화 여부이므로 반환형은 boolean
+		//	*수량이 0이상인가? 결과 반환 (:disabled="!available" 참고)
+		computed : {
+			available : function() {
+				return this.shoes.quantity > 0
+			}
+		}
+	})
+	
+	new Vue({
+		el : '#app',
+		data : {
+			brands : [
+				{
+					productName : '조던',
+					quantity : 20
+				},
+				{
+					productName : '독일군',
+					quantity : 30
+				},
+				{
+					productName : '발렌시아가',
+					quantity : 40
+				},
+				{
+					productName : '골든구스',
+					quantity : 25
+				}
+			]
+		}
+	})
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+

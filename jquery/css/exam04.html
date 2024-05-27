@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	/*
+		1. list1과 list3의 색상을 레드로 변경
+		2. list2와 list4의 색상을 블루로 변경
+		3. list4는 이탤릭체(italic)로 변경
+	*/
+	$(function() {
+		setTimeout(function(){
+			$('.red strong').css('color', 'red');
+			$('.blue strong').css('color', 'blue');
+			$('.blue #s2').css('fontStyle', 'italic');
+			// #s2, .blue #s2, .blue strong#s2, ... 등	
+		}, 2000);
+	});
+</script>
+</head>
+<body>
+	<li class="red"><strong>list1</strong> text text text </li>
+	<li class="blue"><strong id="s1">list2</strong> text text text </li>
+	<li class="red"><strong>list3</strong> text text text</li>
+	<li class="blue"><strong id="s2">list4</strong> text text text </li>
+</body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	var images = [
+			"1번 고양이:cat01.jpg",
+			"2번 고양이:cat02.jpg",
+			"3번 고양이:cat03.jpg",
+			"4번 고양이:cat04.jpg",
+			"1번 강아지:dog01.jpg",
+			"2번 강아지:dog02.jpg",
+			"3번 강아지:dog03.jpg",
+			"4번 강아지:dog04.jpg"];
+	var changeImage = function() {
+		var index = Math.floor(Math.random() * images.length);
+		var imageInfos = images[index].split(':');
+		// "1번 고양이:cat01.jpg" -> ["1번 고양이", "cat01.jpg"]
+		
+		$('p img').attr({
+			'src'   : 'images/' + imageInfos[1],
+			'alt'   : imageInfos[0],
+			'title' : imageInfos[0]
+		}); // ["1번 고양이", "cat01.jpg"]
+	}
+	
+	$(function() {
+		$('button').click(changeImage);		// 버튼 클릭
+		$('p img').mousedown(changeImage);	// 이미지 클릭
+	});
+</script>
+</head>
+<body>
+	<!-- 
+		[요구 기능]
+		1. 이미지 바꾸기
+			1단계 : 버튼 클릭 시 이미지 변경 (A->B 한번)
+			2단계 : 버튼 클릭 시 다음 이미지로 계속 변경 (반복)
+			3단계 : 버튼 클릭 시 랜덤 이미지로 계속 변경 (반복)
+			...
+		2. 다음의 각 이미지 별로 title 속성 정의
+			cat01	-> 1번 고양이
+			...
+			cat04	-> 4번 고양이
+			dog01	-> 1번 강아지
+			...
+			dog04	-> 4번 강아지
+	 -->
+	<button>이미지 변경</button>
+	<p>
+		<img src="images/cat01.jpg" alt="1번 고양이" title="1번 고양이"
+             style="width: 400px; height: 300px;">
+	</p>
+</body>
+</html>
+
+
+
+
+
+
+

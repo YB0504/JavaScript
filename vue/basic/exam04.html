@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- exam03.html의 내용을 jQuery로 만들어 보세요. -->
+	<div id="app">
+		<h1>Hello jQuery</h1>
+		<input id="message">
+	</div>	
+</body>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$('#message').on('keyup', function() {
+		var message = $('#message').val()
+		// 화면에서 브라우저 메모리로 가져오고,
+		$('h1').text(message)
+		// 브라우저 메모리에서 화면으로 뿌려라.
+	})
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+

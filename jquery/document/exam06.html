@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(function() {
+		setTimeout(function() {
+			$('strong, p').
+			wrapAll('<div>').	// <strong>, <p> 모두를 <div>로 감싸라!
+			parent().			// 함수 체인 (연결)
+			css({				// 객체 전달 (여러 옵션 설정)
+				'padding' : '10px',
+				'border' : '1px solid #333'
+			});
+		}, 2000);
+	});
+</script>
+</head>
+<body>
+	<strong>strong strong</strong>
+	<p>Paragraph Paragraph</p>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		Prob 2
+		
+		[요구 사항]
+		이름, 나이, 키, 몸무게를 저장하는 객체와
+		이 객체를 저장하는 리스트를 만들어 출력하되,
+		v-for directive 를 활용하세요.
+		
+		[실행 예시]
+		index. key : value 형태로 출력
+	 -->
+	<div class="container">
+		<!-- JavaScript 동작을 위한 template 활용 -->
+		<template class="list-group">
+			<!-- 배열 순회 : 객체 (member) 추출 -->
+			<template v-for="member in members" class="list-group-item">
+				<ul class="list-group">
+					<!-- 객체 순회 : 배열 순회로 추출한 member 내부의 프로퍼티 추출 -->
+					<li v-for="(value, key, index) in member" class="list-group-item">
+						{{ index + 1 }}. {{ key }} : {{ value }}
+					</li>
+				</ul>
+			</template>
+		</template>
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	new Vue({
+		el : '.container',
+		data : {
+			members : [
+				{
+					name : 'Cafe',
+					age : 8,
+					height: 32,
+					weight: 2.9
+				},
+				{
+					name : 'Latte',
+					age : 7,
+					height: 28,
+					weight: 1.6
+				},
+				{
+					name : 'Coffee',
+					age : 5,
+					height: 24,
+					weight: 3.3
+				},
+				{
+					name : 'Mocha',
+					age : 7,
+					height: 27,
+					weight: 4.3
+				}
+			]
+		}
+	})
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
